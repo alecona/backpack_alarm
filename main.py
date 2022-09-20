@@ -1,19 +1,3 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
 import cv2
 import numpy as np
 
@@ -82,13 +66,6 @@ def draw_object_bounding_box(image_to_process, index, box):
     width = 2
     final_image = cv2.rectangle(image_to_process, start, end, color, width)
 
-    start = (x, y - 10)
-    font_size = 1
-    font = cv2.FONT_HERSHEY_SIMPLEX
-    width = 2
-    text = classes[index]
-    #final_image = cv2.putText(final_image, text, start, font, font_size, color, width, cv2.LINE_AA)
-
     return final_image
 
 
@@ -105,7 +82,7 @@ def draw_object_count(image_to_process, objects_count):
     font = cv2.FONT_HERSHEY_SIMPLEX
     width = 3
     text = ''
-    #text = "Objects found: " + str(objects_count)
+
     if objects_count > 0:
         text = text + " ALARM"
 
@@ -158,7 +135,7 @@ if __name__ == '__main__':
     with open("Resources/coco.names.txt") as file:
         classes = file.read().split("\n")
 
-    video = ("avideo.mp4")
+    video = ("avideo1.mp4")
     look_for = ("backpack, handbag, suitcase").split(',')
 
     list_look_for = []
