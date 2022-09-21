@@ -3,11 +3,9 @@ import numpy as np
 
 
 def apply_yolo_object_detection(image_to_process):
-    """
-    :param image_to_process: original image
-    :return: image with marked objects and captions to them
-    Поиск и определение координат объектов на изображении
-    """
+
+    #Поиск и определение координат объектов на изображении
+
 
     height, width, _ = image_to_process.shape
     blob = cv2.dnn.blobFromImage(image_to_process, 1 / 255, (608, 608),
@@ -51,13 +49,9 @@ def apply_yolo_object_detection(image_to_process):
 
 
 def draw_object_bounding_box(image_to_process, index, box):
-    """
-    :param image_to_process: original image
-    :param index: index of object class defined with YOLO
-    :param box: coordinates of the area around the object
-    :return: image with marked objects
-    Отображение рамки вокруг объекта
-    """
+
+    #Отображение рамки вокруг объекта
+
 
     x, y, w, h = box
     start = (x, y)
@@ -70,12 +64,9 @@ def draw_object_bounding_box(image_to_process, index, box):
 
 
 def draw_object_count(image_to_process, objects_count):
-    """
-    :param image_to_process: original image
-    :param objects_count: the number of objects of the desired class
-    :return: image with labeled number of found objects
-    Отображение количества обнаруженных объектов и тревоги в случае обнаружения
-    """
+
+    #Отображение тревоги в случае обнаружения рюкзака
+
 
     start = (10, 120)
     font_size = 1.5
@@ -97,15 +88,14 @@ def draw_object_count(image_to_process, objects_count):
 
 
 def start_video_object_detection(video: str):
-    """
-    Захват и анализ видео в режиме реального времени
-    """
+
+    #Захват и анализ видео в режиме реального времени
 
     while True:
         try:
 
             video_camera_capture = cv2.VideoCapture(video)
-
+            #video_camera_capture.set(cv2.cv.CV_CAP_PROP_FPS, 1)
             while video_camera_capture.isOpened():
                 ret, frame = video_camera_capture.read()
                 if not ret:
@@ -116,6 +106,7 @@ def start_video_object_detection(video: str):
                 frame = cv2.resize(frame, (1920 // 2, 1080 // 2))
                 cv2.imshow("Video Capture", frame)
                 cv2.waitKey(1)
+
 
             video_camera_capture.release()
             cv2.destroyAllWindows()
@@ -135,7 +126,7 @@ if __name__ == '__main__':
     with open("Resources/coco.names.txt") as file:
         classes = file.read().split("\n")
 
-    video = ("avideo1.mp4")
+    video = ("video.mp4")
     look_for = ("backpack, handbag, suitcase").split(',')
 
     list_look_for = []
